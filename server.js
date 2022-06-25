@@ -8,6 +8,10 @@ const app = express()
 
 const PORT = 3000
 
+app.set('view engine', 'hbs');
+app.set('views',path.join(__dirname,'views'))
+
+
 
 app.use((req,res,next)=>{
     const start = Date.now()    
@@ -17,6 +21,13 @@ app.use((req,res,next)=>{
     console.log( `${req.method} ${req.baseUrl}${req.url} ${delta}ms`)
 })
 
+app.get('/',(req,res)=>{
+    res.render('index',{
+        title : 'My Friends are very cleaver',
+        caption : 'Let\'s go skiing!',
+    })
+
+})
 //app.use(express.static('public'))
 //app.use('/site', express.static('public'))
 app.use('/site', express.static(path.join(__dirname,'public')))
